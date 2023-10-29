@@ -1,6 +1,6 @@
 # 1. Steps to install Task
     - Git clone from repo =>  git clone https://github.com/s300m22/players.git
-    
+
     - composer install
 
     - php artisan migrate
@@ -24,7 +24,7 @@
         o Average score
         o Highest score (when and where it was scored, and against whom)
     
-    - Interfaces (browser based) to create / edit members’ details such as name, contact number and validation
+    - Interfaces (browser based) to create / edit members’ details such as name, contact number with (validation,search and pagination) 
     
     - A leader board screen to list the members with the top 10 average scores, for those members who have played at least 10 matches query      builder
     
