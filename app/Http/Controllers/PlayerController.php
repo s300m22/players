@@ -18,6 +18,8 @@ class PlayerController extends Controller
      */
     public function index()
     {
+        //A leader board screen to list the members with the top 10 average scores, for those
+        //members who have played at least 10 matches
 
         $members =  DB::table('members')
             ->join('players', 'members.id', '=', 'players.member_id')
@@ -35,41 +37,6 @@ class PlayerController extends Controller
     }
 
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create(): \Inertia\Response
-    {
-        $players = Player::orderBy('id', 'desc')->get();
-        $against_list = Player::get(['first_name']);
-        return Inertia::render('Player/Create', [
-            'players' => $players,
-            'against_list' => $against_list
-        ]);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StorePlayerRequest $request)
-    {
-        Player::create([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'phone'     => $request->phone,
-            'email'     => $request->email,
-            'street'    => $request->street,
-            'city'      => $request->city,
-            'state'     => $request->state,
-            'zip_code'  => $request->zip_code,
-            'country'   => $request->country,
-            'location'   => $request->location,
-            'match_date'   => $request->match_date,
-            'against'   => $request->against,
-        ]);
-
-        return redirect()->route('player.create')->with('message', 'Player data has been created successfully');
-    }
 
 
     /**
@@ -91,23 +58,7 @@ class PlayerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePlayerRequest $request)
-    {
 
-        Player::where('id',$request->id)->update([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'phone'     => $request->phone,
-            'email'     => $request->email,
-            'street'    => $request->street,
-            'city'      => $request->city,
-            'state'     => $request->state,
-            'zip_code'  => $request->zip_code,
-            'country'   => $request->country,
-        ]);
-
-        return redirect()->route('player.create')->with('message', 'Player data has been updated successfully');
-    }
 
     /**
      * Remove the specified resource from storage.

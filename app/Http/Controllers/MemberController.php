@@ -24,6 +24,7 @@ class MemberController extends Controller
      */
     public function create()
     {
+        //Retrieve all members desc
         $members = Member::orderBy('id', 'desc')->get();
         return Inertia::render('Member/Create', [
             'members' => $members,
@@ -32,8 +33,13 @@ class MemberController extends Controller
 
     public function profile(){
 
+        //Retrieve count number of winning players
         $win = Player::where('win_or_loss', 'win')->count();
+
+        //Retrieve count number of loser players
         $loss = Player::where('win_or_loss', 'loss')->count();
+
+        //Retrieve The highest winning player against whom, when and where
         $highest_score = DB::table('players')
             ->join('members', 'players.member_id', '=', 'members.id')
             ->select(
@@ -46,6 +52,8 @@ class MemberController extends Controller
             )
             ->orderByDesc('players.score')
             ->first();
+
+        //Retrieve the average score
         $average_score = Player::avg('score');
 
         return Inertia::render('PlayerProfile/Index', [
@@ -61,7 +69,7 @@ class MemberController extends Controller
      */
     public function store(StoreMemberRequest $request)
     {
-
+        // Create Members
         Member::create([
 
             'first_name' => $request->first_name,
@@ -99,7 +107,7 @@ class MemberController extends Controller
      */
     public function update(UpdateMemberRequest $request)
     {
-
+        // Update Members
         Member::where('id',$request->id)->update([
 
             'first_name' => $request->first_name,
