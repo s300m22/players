@@ -37,5 +37,5 @@ Route::middleware([
     'verified',
 ])->group(function () {
 
-    Route::get('dashboard', [PlayerController::class,'index'])->name('dashboard');
+    //Route::get('dashboard', [PlayerController::class,'index'])->name('dashboard');
 });
