@@ -1,6 +1,8 @@
 # 1. Steps to install Task
     - Git clone from repo =>  git clone https://github.com/s300m22/players.git
     
+    - composer install
+
     - php artisan migrate
     
     - php artisan db:seed
